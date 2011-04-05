@@ -1,6 +1,12 @@
 .bundle
 db/*.sqlite3
 log/*.log
-tmp/
-vendor/bundled_gems/
+tmp/**/*
+vendor/bundled_gems
+config/database.yml
+config/application_config.yml
+db/development_structure.sql
+db/schema.rb
+public/system/
+nbproject/
 
