@@ -1,4 +1,9 @@
 Mcm::Application.routes.draw do
+  root :to => "users#index"
+  devise_for :users, :path_names => { :sign_in => 'login',
+    :sign_out => 'logout', :password => 'secret', :confirmation => 'verification',
+    :unlock => 'unblock', :registration => 'register', :sign_up => 'cmon_let_me_in' }
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -56,3 +61,4 @@ Mcm::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
 end
+
