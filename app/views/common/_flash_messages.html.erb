@@ -1,0 +1,21 @@
+<% content_for :more_javascripts do %>
+  <%= javascript_include_tag 'jquery.messagebar'%>
+  <%= stylesheet_link_tag 'messages/message_skin' %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    <% flash.each do |type, message| -%>
+      $('#message_bar').displayMessage({
+        message       : '<%= message %>',
+        background    : '#111111',
+        color         : '<%= (type == :alert) ? "red" : "#FFFFFF"%>',
+        speed         : 'fast',
+        skin          : 'plain',
+        position      : 'absolute',
+        autohide      : false,
+      });
+    <% end -%>
+  });
+</script>
+

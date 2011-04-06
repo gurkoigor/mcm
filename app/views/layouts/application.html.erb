@@ -39,6 +39,8 @@
       </div>
 
       <div class="" id="main">
+        <div id="message_bar"><!-- content --></div>
+        <%= yield :flash_message %>
         <div id="sidebar">
         </div>
 
@@ -47,7 +49,6 @@
             <%= yield :contextual %>
           </div>
           <%= yield :title_page %>
-          <%= yield :flash_message %>
           <%= yield %>
         </div>
       </div>
