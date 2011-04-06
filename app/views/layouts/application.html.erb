@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>MCM</title>
+    <%= stylesheet_link_tag 'application' %>
     <%= stylesheet_link_tag 'ui_templates', :media => 'all' %>
     <%= stylesheet_link_tag 'themes/basecamp/application.css', :media => 'all' %>
     <%= stylesheet_link_tag 'application' %>
@@ -17,9 +18,9 @@
             <div id="account">
               <ul>
                 <li>
-                  Logged in as<%= link_to current_user.email, edit_user_path(current_user) %>
+                  Пользователь <%= link_to current_user.email, edit_user_registration_path(current_user) %>
                 </li>
-                <li><%= link_to "Logout", destroy_user_session_path, :class => "logout" %></li>
+                <li><%= link_to "Выход", destroy_user_session_path, :class => "logout" %></li>
               </ul>
             </div>
             <div id="loggedas"></div>
@@ -33,7 +34,7 @@
         </div>
 
         <div id="main-menu">
-          <%= raw navigation_menu  if current_user %>
+          <%#= raw navigation_menu  if current_user %>
         </div>
       </div>
 
