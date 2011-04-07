@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :parent_id
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :parent_id,
+    :first_name, :last_name
   attr_protected :status, :admin
 
   validates :parent_id, :presence => true
