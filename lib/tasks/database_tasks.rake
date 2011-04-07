@@ -7,7 +7,7 @@ namespace :db do
     if user.nil?
       user = User.create!(:email => "gurko.igor@gmail.com", :first_name => "Igor", :last_name => "Gurko",
       :password => "123456", :password_confirmation => "123456", :parent_id => "0")
-      user.status = true
+      user.active = true
       user.admin = true
       user.save
     end

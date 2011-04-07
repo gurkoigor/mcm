@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :remember_me, :parent_id,
     :first_name, :last_name
-  attr_protected :status, :admin
+  attr_protected :active, :admin
 
   validates :parent_id, :presence => true
 
