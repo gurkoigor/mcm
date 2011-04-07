@@ -5,6 +5,12 @@ Mcm::Application.routes.draw do
     :sign_out => 'logout', :password => 'secret', :confirmation => 'verification',
     :unlock => 'unblock', :sign_up => 'cmon_let_me_in' }
 
+  resources :users do
+    member do
+      get :load_users
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

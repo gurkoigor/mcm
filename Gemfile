@@ -11,6 +11,7 @@ gem "devise"
 gem "paperclip"
 gem 'jquery-rails', "~>0.2"
 gem 'dynamic_form' # for error messages
+gem 'acts_as_tree'
 
 group :test, :development do
   gem "rspec-rails"

@@ -1,0 +1,13 @@
+<script type="text/javascript">
+  $(function(){
+    $("#tree").dynatree({
+      fx: { height: "toggle", duration: 200 },
+      initAjax: {
+        url: "<%= load_users_user_path(current_user) %>"
+      }
+    });
+  });
+</script>
+
+<div id="tree"></div>
+

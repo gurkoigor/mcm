@@ -2,3 +2,10 @@
   <%= render :partial => "common/flash_messages"%>
 <% end %>
 
+<% content_for :more_javascripts do %>
+  <%= javascript_include_tag "jquery.dynatree" %>
+  <%= stylesheet_link_tag "ui.dynatree" %>
+<% end %>
+
+<%= render :partial => "users_tree" %>
+
