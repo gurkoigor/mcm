@@ -12,5 +12,9 @@ class User < ActiveRecord::Base
 
   acts_as_tree :order => "email"
 
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
+
 end
 

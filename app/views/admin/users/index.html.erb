@@ -1,0 +1,19 @@
+<%= content_for :contextual do %>
+  <%= link_to "Новый пользователь", new_admin_user_path, :class => "icon icon-add" %>
+<% end %>
+ <h2>Пользователи</h2>
+
+<table class="list">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Ф.И.О</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= render :partial => "user", :collection => @users %>
+  </tbody>
+</table>
+ <p class="pagination"></p>
+
