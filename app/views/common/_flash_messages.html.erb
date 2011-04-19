@@ -1,6 +1,7 @@
 <% content_for :more_javascripts do %>
-  <%= javascript_include_tag 'jquery.messagebar'%>
+  <%= javascript_include_tag 'jquery.messagebar' %>
   <%= stylesheet_link_tag 'messages/message_skin' %>
+  <%= javascript_include_tag 'jquery.floatingmessage' %>
 <% end %>
 
 <script type="text/javascript">
@@ -14,6 +15,20 @@
         skin          : 'plain',
         position      : 'absolute',
         autohide      : false,
+      });
+    <% end -%>
+
+    <% object.errors.full_messages.each do |msg| -%>
+      $.floatingMessage("<%= msg %>",{
+        align:"right",
+        verticalAlign:"bottom",
+        show : "fold",
+        hide : "explode",
+        stuffEaseTime : 500,
+        stuffEasing : "swing",
+        moveEaseTime : 200,
+        moveEasing   : "easeInExpo",
+        time:6000
       });
     <% end -%>
   });

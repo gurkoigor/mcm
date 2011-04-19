@@ -1,0 +1,15 @@
+<%= content_for :title_page do %>
+  <h2>Новый пользователь</h2>
+<% end %>
+
+<%= content_for :flash_message do %>
+  <%= render :partial => "common/flash_messages", :locals => {:object => @user} %>
+<% end %>
+
+<%= form_for @user, :url => {:action => :create}, :html => {:class => 'tabular'} do |f| %>
+  <div class="box">
+    <%= render :partial => 'form', :locals => {:f =>f} %>
+    <%= f.submit 'Создать' %>
+  </div>
+<% end %>
+
