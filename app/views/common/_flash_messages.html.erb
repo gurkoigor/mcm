@@ -18,19 +18,21 @@
       });
     <% end -%>
 
-    <% object.errors.full_messages.each do |msg| -%>
-      $.floatingMessage("<%= msg %>",{
-        align:"right",
-        verticalAlign:"bottom",
-        show : "fold",
-        hide : "explode",
-        stuffEaseTime : 500,
-        stuffEasing : "swing",
-        moveEaseTime : 200,
-        moveEasing   : "easeInExpo",
-        time:6000
-      });
-    <% end -%>
+    <% if object %>
+      <% object.errors.full_messages.each do |msg| -%>
+        $.floatingMessage("<%= msg %>",{
+          align:"right",
+          verticalAlign:"bottom",
+          show : "fold",
+          hide : "explode",
+          stuffEaseTime : 500,
+          stuffEasing : "swing",
+          moveEaseTime : 200,
+          moveEasing   : "easeInExpo",
+          time:6000
+        });
+      <% end -%>
+    <% end %>
   });
 </script>
 
