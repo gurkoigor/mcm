@@ -18,7 +18,7 @@
       });
     <% end -%>
 
-    <% if object %>
+    <% unless object.nil? %>
       <% object.errors.full_messages.each do |msg| -%>
         $.floatingMessage("<%= msg %>",{
           align:"right",
