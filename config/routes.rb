@@ -12,7 +12,11 @@ Mcm::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :users
+    resources :users do
+      collection do
+       get :load_users
+      end
+    end
   end
 
   # The priority is based upon order of creation:

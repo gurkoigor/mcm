@@ -3,7 +3,7 @@
   <td align="center" style="width:15%;"><%= user.full_name %></td>
   <td class="buttons">
     <%= link_to "Редактировать", edit_admin_user_path(user) %>
-    <%= link_to "Удалить", admin_user_path(user), :method => "delete" %>
+    <%= link_to "Удалить", admin_user_path(user), :method => "delete", :confirm => "Вы уверенны?" %>
   </td>
 </tr>
 

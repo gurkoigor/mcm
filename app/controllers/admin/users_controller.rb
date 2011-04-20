@@ -13,6 +13,7 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.admin = params[:user][:admin]
     if @user.save
       flash[:notice] = "Пользователь создан"
       redirect_to edit_admin_user_path(@user)
@@ -27,13 +28,36 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation) if params[:password_confirmation].blank?
+    end if params[:user]
+
     if @user.update_attributes(params[:user])
+      @user.admin = params[:user][:admin]
+      @user.save
       flash[:notice] = "Пользователь обновлен"
       redirect_to edit_admin_user_path(@user)
     else
       flash[:error] = "Пользователь не обновлен"
       render :action => :edit
     end
+  end
+
+  def destroy
+    if @user.destroy
+      flash[:notice] = "Пользователь удален"
+    else
+      flash[:error] = "Пользователь не удален"
+    end
+    redirect_to :action => :index
+  end
+
+  def load_users
+    @users = []
+    @users = User.where(["email like ?", "%#{params[:user_email]}%"])
+    @users = @users.map{|u| {:label => u.email, :value => u.id}} unless @users.nil?
+    render :json => @users
   end
 
   private

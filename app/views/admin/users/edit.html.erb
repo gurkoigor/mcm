@@ -1,0 +1,14 @@
+<%= content_for :title_page do %>
+  <h2>Редактирование пользователя <%= @user.email %></h2>
+<% end %>
+
+<%= content_for :flash_message do %>
+  <%= render :partial => "common/flash_messages", :locals => {:object => @user} %>
+<% end %>
+
+<%= form_for @user, :url => {:action => :update}, :html => {:class => 'tabular'} do |f| %>
+  <div class="box">
+    <%= render :partial => 'form', :locals => {:f =>f} %>
+    <%= f.submit 'Обновить' %>
+  </div>
+<% end %>
