@@ -1,25 +1,22 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Редактирование <%= resource.email %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <p><%= f.label :email %><br />
-  <%= f.email_field :email %></p>
-
-  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></p>
-
-  <p><%= f.submit "Update" %></p>
+<% content_for :flash_message do %>
+  <%= render :partial => "common/flash_messages", :locals => {:object => @user}%>
 <% end %>
 
-<h3>Cancel my account</h3>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+  <p><%= f.label :email, "Почтовый адрес" %><br />
+  <%= f.email_field :email %></p>
 
-<%= link_to "Back", :back %>
+  <p><%= f.label :password, "Новый пароль" %> <i>(Оставте пустым, если не хотите менять пароль)</i><br />
+  <%= f.password_field :password %></p>
+
+  <p><%= f.label :password_confirmation, "Пдтверждение пароля" %><br />
+  <%= f.password_field :password_confirmation %></p>
+
+  <p><%= f.label :current_password, "Текущий пароль" %> <i>(ввести текущий пароль, для сохранения данных)</i><br />
+  <%= f.password_field :current_password %></p>
+
+  <p><%= f.submit "Обновить" %>&nbsp;|&nbsp;<%= link_to "Назад", :back %></p>
+<% end %>

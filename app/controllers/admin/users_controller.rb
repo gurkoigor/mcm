@@ -45,10 +45,16 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    if @user.destroy
-      flash[:notice] = "Пользователь удален"
+    unless @user.parent_id.zero?
+      if @user.children.update_all(:parent_id => @user.parent_id)
+        if @user.destroy
+          flash[:notice] = "Пользователь удален"
+        else
+          flash[:error] = "Пользователь не удален"
+        end
+      end
     else
-      flash[:error] = "Пользователь не удален"
+      flash[:error] = "Главный пользователь системы не может быть уделен"
     end
     redirect_to :action => :index
   end

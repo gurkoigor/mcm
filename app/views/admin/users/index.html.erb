@@ -1,7 +1,12 @@
-<%= content_for :contextual do %>
+<% content_for :contextual do %>
   <%= link_to "Новый пользователь", new_admin_user_path, :class => "icon icon-add" %>
 <% end %>
- <h2>Пользователи</h2>
+
+<% content_for :flash_message do %>
+  <%= render :partial => "common/flash_messages", :locals => {:object => @user}%>
+<% end %>
+
+<h2>Пользователи</h2>
 
 <table class="list">
   <thead>

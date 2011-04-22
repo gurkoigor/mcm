@@ -10,11 +10,11 @@
       $('#message_bar').displayMessage({
         message       : '<%= message %>',
         background    : '#111111',
-        color         : '<%= (type == :alert) ? "red" : "#FFFFFF"%>',
+        color         : '<%= (type == :alert || type == :error) ? "red" : "#FFFFFF"%>',
         speed         : 'fast',
         skin          : 'plain',
         position      : 'absolute',
-        autohide      : false,
+        autohide      : false
       });
     <% end -%>
 
@@ -35,4 +35,3 @@
     <% end %>
   });
 </script>
-

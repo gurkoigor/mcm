@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!
   before_filter :load_user, :only => [:load_users]
 
   def index

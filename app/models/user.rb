@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates_numericality_of :parent_id, :greater_than => 0, :if => Proc.new {|user| !user.admin? }
   validates_numericality_of :parent_id, :only_integer => true
 
-  acts_as_tree :order => "email"
+  acts_as_tree :order => "email", :dependent => false
 
   validate :parent_user
 
