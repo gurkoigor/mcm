@@ -9,6 +9,7 @@
 <%= form_for @user, :url => {:action => :update}, :html => {:class => 'tabular'} do |f| %>
   <div class="box">
     <%= render :partial => 'form', :locals => {:f =>f} %>
-    <%= f.submit 'Обновить' %>
+    <%= f.submit 'Обновить' %>&nbsp;|
+    <%= link_to "Назад", admin_users_path %>
   </div>
 <% end %>

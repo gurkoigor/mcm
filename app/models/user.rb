@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
   def parent_user
     errors.add(:parent_id, "Родительский пользователь не найден") if User.find_by_id(self.parent_id).nil? &&
-      !self.parent_id.zero? || self.parent_id == self.id
+      !self.parent_id.nil? && !self.parent_id.zero? || self.parent_id == self.id
   end
 
 end

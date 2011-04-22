@@ -9,7 +9,8 @@
 <%= form_for @user, :url => {:action => :create}, :html => {:class => 'tabular'} do |f| %>
   <div class="box">
     <%= render :partial => 'form', :locals => {:f =>f} %>
-    <%= f.submit 'Создать' %>
+    <%= f.submit 'Создать' %>&nbsp;|
+    <%= link_to "Назад", admin_users_path %>
   </div>
 <% end %>
 
