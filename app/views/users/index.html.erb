@@ -7,5 +7,9 @@
   <%= stylesheet_link_tag "ui.dynatree" %>
 <% end %>
 
+<%= content_for :title_page do %>
+  <h2>Древовидная Схема Рефералов</h2>
+<% end %>
+
 <%= render :partial => "users_tree" %>
 
