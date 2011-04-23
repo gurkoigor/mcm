@@ -9,4 +9,5 @@ db/development_structure.sql
 db/schema.rb
 public/system/
 nbproject/
+.idea/
 

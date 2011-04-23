@@ -1,7 +1,10 @@
+<% content_for :flash_message do %>
+  <%= render :partial => "common/flash_messages", :locals => {:object => @user}%>
+<% end %>
+
 <h2>Регистрация</h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
 
   <p><%= f.label :email, "Почтовый адрес" %><br />
   <%= f.email_field :email %></p>

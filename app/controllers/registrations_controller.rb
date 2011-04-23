@@ -8,7 +8,8 @@ class RegistrationsController < Devise::RegistrationsController
     @parent_user = User.find_by_id(params[:user][:parent_id])
     @user = User.new(params[:user])
     if @parent_user.nil?
-      flash[:alert] = "Пользователь не найден"
+      @user.errors.add(:parent_id)
+      flash[:alert] = "Реферер не найден"
       render :action => :new
     else
       if @user.save

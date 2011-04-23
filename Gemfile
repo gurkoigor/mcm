@@ -12,9 +12,11 @@ gem "paperclip"
 gem 'jquery-rails', "~>0.2"
 gem 'dynamic_form' # for error messages
 gem 'acts_as_tree'
+gem 'russian'
 
 group :test, :development do
   gem "rspec-rails"
+  gem "mongrel"
 end
 
 # Use unicorn as the web server

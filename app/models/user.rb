@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   attr_protected :active, :admin
 
   validates :parent_id, :presence => true
+  validates :full_name, :presence => true
   validates_numericality_of :parent_id, :greater_than => 0, :if => Proc.new {|user| !user.admin? }
   validates_numericality_of :parent_id, :only_integer => true
 
@@ -28,7 +29,7 @@ class User < ActiveRecord::Base
   private
 
   def parent_user
-    errors.add(:parent_id, "Родительский пользователь не найден") if User.find_by_id(self.parent_id).nil? &&
+    errors.add(:parent_id, "не найден") if User.find_by_id(self.parent_id).nil? &&
       !self.parent_id.nil? && !self.parent_id.zero? || self.parent_id == self.id
   end
 

@@ -1,3 +1,7 @@
+<% content_for :flash_message do %>
+  <%= render :partial => "common/flash_messages", :locals => {:object => nil}%>
+<% end %>
+
 <h2>Вход</h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
