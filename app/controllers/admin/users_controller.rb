@@ -15,10 +15,10 @@ class Admin::UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.admin = params[:user][:admin]
     if @user.save
-      flash.now[:notice] = "Пользователь создан"
+      flash[:notice] = "Пользователь создан"
       redirect_to edit_admin_user_path(@user)
     else
-      flash.now[:error] = "Пользователь не создан"
+      flash[:error] = "Пользователь не создан"
       render :action => :new
     end
   end
@@ -36,10 +36,10 @@ class Admin::UsersController < ApplicationController
     if @user.update_attributes(params[:user])
       @user.admin = params[:user][:admin]
       @user.save
-      flash.now[:notice] = "Пользователь обновлен"
+      flash[:notice] = "Пользователь обновлен"
       redirect_to edit_admin_user_path(@user)
     else
-      flash.now[:error] = "Пользователь не обновлен"
+      flash[:error] = "Пользователь не обновлен"
       render :action => :edit
     end
   end
@@ -48,13 +48,13 @@ class Admin::UsersController < ApplicationController
     unless @user.parent_id.zero?
       if @user.children.update_all(:parent_id => @user.parent_id)
         if @user.destroy
-          flash.now[:notice] = "Пользователь удален"
+          flash[:notice] = "Пользователь удален"
         else
-          flash.now[:error] = "Пользователь не удален"
+          flash[:error] = "Пользователь не удален"
         end
       end
     else
-      flash.now[:error] = "Главный пользователь системы не может быть уделен"
+      flash[:error] = "Главный пользователь системы не может быть уделен"
     end
     redirect_to :action => :index
   end

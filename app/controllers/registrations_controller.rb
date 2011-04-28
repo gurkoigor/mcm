@@ -9,21 +9,21 @@ class RegistrationsController < Devise::RegistrationsController
     @user = User.new(params[:user])
     if @parent_user.nil?
       @user.errors.add(:parent_id)
-      flash.now[:alert] = "Реферер не найден"
+      flash[:alert] = "Реферер не найден"
       render :action => :new
     else
       if @user.save
-        flash.now[:notice] = "Вы успешно зарегестрированы в сети"
+        flash[:notice] = "Вы успешно зарегестрированы в сети"
         sign_in_and_redirect(resource_name, @user)
       else
-        flash.now[:alert] = "Вы не зарегестрированы"
+        flash[:alert] = "Вы не зарегестрированы"
         render :action => :new
       end
     end
   end
 
   def destroy
-    flash.now[:error] = "Опция не доступна!!!"
+    flash[:error] = "Опция не доступна!!!"
     redirect_to root_path
     #Метод для удаления самого себя, для востановления использовать super или убрать метод с контроллера
   end

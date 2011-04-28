@@ -1,8 +1,8 @@
-<%= content_for :title_page do %>
+<% content_for :title_page do %>
   <h2>Редактирование пользователя <%= @user.email %></h2>
 <% end %>
 
-<%= content_for :flash_message do %>
+<% content_for :flash_message do %>
   <%= render :partial => "common/flash_messages", :locals => {:object => @user} %>
 <% end %>
 
@@ -13,3 +13,4 @@
     <%= link_to "Назад", admin_users_path %>
   </div>
 <% end %>
+

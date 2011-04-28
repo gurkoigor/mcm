@@ -9,6 +9,9 @@
   <p><%= f.label :email, "Почтовый адрес" %><br />
   <%= f.email_field :email %></p>
 
+  <p><%= f.label :full_name, "Ф.И.О" %><br />
+  <%= f.text_field :full_name %></p>
+
   <p><%= f.label :password, "Новый пароль" %> <i>(Оставте пустым, если не хотите менять пароль)</i><br />
   <%= f.password_field :password %></p>
 
@@ -20,3 +23,4 @@
 
   <p><%= f.submit "Обновить" %>&nbsp;|&nbsp;<%= link_to "Назад", :back %></p>
 <% end %>
+
