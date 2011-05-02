@@ -81,8 +81,9 @@ ru:
         password_confirmation: "Подтверждение пароля"
         current_password: "Текущий пароль"
         email: "Почтовый адрес"
-      user:
-        type: "Тип"
+        tariff_ids: "Тарифный план"
+      tariff:
+        tariff_type: "Тип"
         title: "Название"
         value: "Стоимость"
 

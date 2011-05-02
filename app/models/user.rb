@@ -4,21 +4,25 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  attr_accessor :tariff_ids
   attr_accessible :email, :password, :password_confirmation, :remember_me, :parent_id,
-    :full_name
+                  :full_name, :tariff_ids
   attr_protected :active, :admin
 
   validates :parent_id, :presence => true
   validates :full_name, :presence => true
-  validates_numericality_of :parent_id, :greater_than => 0, :if => Proc.new {|user| !user.admin? }
+  validates_numericality_of :parent_id, :greater_than => 0, :if => Proc.new { |user| !user.admin? }
   validates_numericality_of :parent_id, :only_integer => true
 
   acts_as_tree :order => "email", :dependent => false
 
   validate :parent_user
+  validate :select_tariff_ids
 
   has_many :tariffs_users, :dependent => :destroy
   has_many :tariffs, :through => :tariffs_users
+
+  after_save :create_tariff
 
   COEF_CARD = {"1" => 5, "2" => 1, "3" => 1, "4" => 1, "5" => 1}
   COEF_BALANS = {"1" => 5, "2" => 1, "3" => 0.5, "4" => 0.25, "5" => 0.12}
@@ -38,6 +42,20 @@ class User < ActiveRecord::Base
     errors.add(:parent_id, "не найден") if User.find_by_id(self.parent_id).nil? &&
       !self.parent_id.nil? && !self.parent_id.zero? || self.parent_id == self.id
   end
+
+  def select_tariff_ids
+    errors.add(:tariff_ids, "должен быть выбран") if self.tariff_ids.blank?
+    errors.add(:tariff_ids, "не известен") if (Tariff.mobile_kyivstar_tariff.find_all_by_id(self.tariff_ids).count > 1) ||
+      (Tariff.mobile_life_tariff.find_all_by_id(self.tariff_ids).count > 1)
+  end
+
+  def create_tariff
+    self.tariffs_users.clear
+    self.tariff_ids.uniq.each do |t|
+      self.tariffs_users.create(:tariff_id => t)
+    end
+  end
+
 
 end
 

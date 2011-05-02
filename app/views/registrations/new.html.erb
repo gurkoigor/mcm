@@ -1,25 +1,48 @@
 <% content_for :flash_message do %>
-  <%= render :partial => "common/flash_messages", :locals => {:object => @user}%>
+  <%= render :partial => "common/flash_messages", :locals => {:object => @user} %>
 <% end %>
 
 <h2>Регистрация</h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 
-  <p><%= f.label :email, "Почтовый адрес" %><br />
-  <%= f.email_field :email %></p>
+  <p><%= f.label :email, "Почтовый адрес" %><br/>
+    <%= f.email_field :email %></p>
 
-  <p><%= f.label :full_name, "Ф.И.О" %><br />
-  <%= f.text_field :full_name %></p>
+  <p><%= f.label :full_name, "Ф.И.О" %><br/>
+    <%= f.text_field :full_name %></p>
 
-  <p><%= f.label :password, "Пароль" %><br />
-  <%= f.password_field :password %></p>
+  <p><%= f.label :password, "Пароль" %><br/>
+    <%= f.password_field :password %></p>
 
-  <p><%= f.label :password_confirmation, "Подтверждение пароля" %><br />
-  <%= f.password_field :password_confirmation %></p>
+  <p><%= f.label :password_confirmation, "Подтверждение пароля" %><br/>
+    <%= f.password_field :password_confirmation %></p>
 
-  <p><%= f.label :parent_id, "Номер реферера" %><br />
-  <%= f.text_field :parent_id %></p>
+  <p><%= f.label :parent_id, "Номер реферера" %><br/>
+    <%= f.text_field :parent_id %></p>
+  <p>
+    <%= label_tag "Тарфиный план" %>
+    <table class="list" style="width:265px">
+      <thead>
+      <tr>
+        <th>Kyivstar</th>
+        <th>Life</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= select_tag "user[tariff_ids][]", options_for_select(mobile_tariff_options("Kyivstar"),
+                                                                   params[:user] ? params[:user][:tariff_ids] : ""),
+                {:style => "width:100%"} %>
+        </td>
+        <td><%= select_tag "user[tariff_ids][]", options_for_select(mobile_tariff_options("Life"),
+                                                                    params[:user] ? params[:user][:tariff_ids] : ""),
+                {:style => "width:100%"} %></td>
+      </tr>
+      </tbody>
+    </table>
+    <em>Тарифные планы можно комбинировать</em>
+  </p>
 
   <p><%= f.submit "Зарегистрироваться" %></p>
 <% end %>
