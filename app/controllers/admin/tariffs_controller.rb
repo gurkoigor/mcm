@@ -2,7 +2,7 @@ class Admin::TariffsController < ApplicationController
   before_filter :load_tariff, :only => [:edit, :update, :destroy]
 
   def index
-    @tariffs = Tariff.all
+    @tariffs = Tariff.order("tariff_type, title, value").all
   end
 
   def new
