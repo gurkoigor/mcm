@@ -5,6 +5,10 @@
 <%= content_for :more_javascripts do %>
   <%= javascript_include_tag "jquery.dynatree" %>
   <%= stylesheet_link_tag "ui.dynatree" %>
+  <%= javascript_include_tag "jquery.dataTables" %>
+  <%= stylesheet_link_tag "datatable/demo_table" %>
+  <%= stylesheet_link_tag "datatable/demo_table_jui" %>
+  <%= stylesheet_link_tag "datatable/demo_page" %>
 <% end %>
 
 <%= content_for :title_page do %>
@@ -12,4 +16,36 @@
 <% end %>
 
 <%= render :partial => "users_tree" %>
+
+<table class='data-table display' style="width: 100%">
+  <thead>
+    <tr>
+      <th>Уровень</th>
+      <th>Количество Пользоветелей</th>
+      <th>Карточка</th>
+      <th>Счет</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr></tr>
+  </tbody>
+  <tfoot>
+    <tr></tr>
+  </tfoot>
+</table>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.data-table').dataTable({
+      bSort: false,
+      //bJQueryUI: true,
+      //bProcessing: true,
+      bPaginate: false,
+      bFilter: false,
+      bAutoWidth: true,
+      bInfo: false,
+      sAjaxSource: "users/<%= current_user.id %>/load_data_table/"
+    });
+  } );
+</script>
 

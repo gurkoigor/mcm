@@ -8,6 +8,7 @@ Mcm::Application.routes.draw do
   resources :users do
     member do
       get :load_users
+      get :load_data_table
     end
   end
 
@@ -16,6 +17,9 @@ Mcm::Application.routes.draw do
       collection do
        get :load_users
       end
+    end
+    resources :tariffs do
+
     end
   end
 

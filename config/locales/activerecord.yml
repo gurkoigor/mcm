@@ -81,6 +81,10 @@ ru:
         password_confirmation: "Подтверждение пароля"
         current_password: "Текущий пароль"
         email: "Почтовый адрес"
+      user:
+        type: "Тип"
+        title: "Название"
+        value: "Стоимость"
 
     # Перевод названий моделей. Используется в Model.human_name().
     #

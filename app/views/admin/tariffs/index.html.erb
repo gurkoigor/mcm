@@ -1,0 +1,24 @@
+<% content_for :contextual do %>
+  <%= link_to "Новый тариф", new_admin_tariff_path, :class => "icon icon-add" %>
+<% end %>
+
+<% content_for :flash_message do %>
+  <%= render :partial => "common/flash_messages", :locals => {:object => @tariff}%>
+<% end %>
+
+<h2>Тарифы</h2>
+
+<table class="list">
+  <thead>
+    <tr>
+      <th>Тип</th>
+      <th>Название</th>
+      <th>Стоимость</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= render :partial => "tariff", :collection => @tariffs %>
+  </tbody>
+</table>
+ <p class="pagination"></p>

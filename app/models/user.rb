@@ -17,6 +17,12 @@ class User < ActiveRecord::Base
 
   validate :parent_user
 
+  has_many :tariffs_users, :dependent => :destroy
+  has_many :tariffs, :through => :tariffs_users
+
+  COEF_CARD = {"1" => 5, "2" => 1, "3" => 1, "4" => 1, "5" => 1}
+  COEF_BALANS = {"1" => 5, "2" => 1, "3" => 0.5, "4" => 0.25, "5" => 0.12}
+
   def update_without_current_password(params={})
     if params[:password].blank?
       params.delete(:password)

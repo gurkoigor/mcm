@@ -8,8 +8,12 @@ module ApplicationHelper
 
     result = ""
     result << "<ul>"
-    result << "<li>#{link_to "Пользователи", admin_users_path,
-      :class => "#{id_proc.call(Admin::UsersController)}"}</li>" if current_user.admin?
+    if current_user.admin?
+      result << "<li>#{link_to "Пользователи", admin_users_path,
+        :class => "#{id_proc.call(Admin::UsersController)}"}</li>"
+      result << "<li>#{link_to "Тарифы", admin_tariffs_path,
+        :class => "#{id_proc.call(Admin::TariffsController)}"}</li>"
+    end
     result << "</ul>"
     result
   end

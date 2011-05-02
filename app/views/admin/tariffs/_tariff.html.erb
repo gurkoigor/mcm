@@ -1,0 +1,9 @@
+<tr class="<%= cycle('odd', 'even')%>">
+  <td><span><%= tariff.type %></span></td>
+  <td align="center" style="width:15%;"><%= tariff.title %></td>
+  <td align="center" style="width:15%;"><%= tariff.value %></td>
+  <td class="buttons">
+    <%= link_to "Редактировать", edit_admin_tariff_path(tariff) %>
+    <%= link_to "Удалить", admin_tariff_path(tariff), :method => "delete", :confirm => "Вы уверенны?" %>
+  </td>
+</tr>
