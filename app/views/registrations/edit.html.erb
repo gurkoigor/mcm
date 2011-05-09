@@ -21,29 +21,25 @@
   <p><%= f.label :current_password, "Текущий пароль" %> <i>(ввести текущий пароль, для сохранения данных)</i><br/>
     <%= f.password_field :current_password %></p>
   <p>
-    <%= label_tag "Тарфиный план" %>
+    <%= label_tag "Текущий тарфиный план" %>
+    <%= f.hidden_field :tariff_ids, :value => f.object.tariffs.map(&:id).join(",") %>
   <table class="list" style="width:265px">
     <thead>
     <tr>
-      <th>Kyivstar</th>
-      <th>Life</th>
+      <% f.object.tariffs.each do |t| %>
+        <%= content_tag(:th, t.title) %>
+      <% end %>
     </tr>
     </thead>
     <tbody>
     <tr>
-      <td><%= select_tag "user[tariff_ids][]", options_for_select(mobile_tariff_options("Kyivstar"),
-                                                                  params[:user]? params[:user][:tariff_ids] :
-                                                                          f.object.tariffs_users.map(&:tariff_id)),
-                         {:style => "width:100%"} %>
-      </td>
-      <td><%= select_tag "user[tariff_ids][]", options_for_select(mobile_tariff_options("Life"),
-                                                                  params[:user]? params[:user][:tariff_ids] :
-                                                                          f.object.tariffs_users.map(&:tariff_id)),
-                         {:style => "width:100%"} %></td>
+      <% f.object.tariffs.each do |t| %>
+        <%= content_tag(:td, t.value, :class => "center") %>
+      <% end %>
     </tr>
     </tbody>
   </table>
-  <em>Тарифные планы можно комбинировать</em>
+  <em></em>
   </p>
   <p><%= f.submit "Обновить" %>&nbsp;|&nbsp;<%= link_to "Назад", :back %></p>
 <% end %>

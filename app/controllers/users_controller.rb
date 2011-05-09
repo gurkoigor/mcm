@@ -23,18 +23,18 @@ class UsersController < ApplicationController
 
   private
 
-  def get_level_users(user, levels)
+  def get_level_users(user, levels, level = 1)
     user.children.each do |child|
-      levels["#{child.ancestors.count}"] << child
-      get_level_users(child, levels)
+      levels["#{level}"] << child
+      get_level_users(child, levels, level+1) if level+1 <= 5
     end
     levels
   end
 
-  def load_children(user)
+  def load_children(user, level = 0)
     children = []
     user.children.each do |child|
-      children << {:title => child.email, :children => load_children(child)} if child.ancestors.size < 5
+      children << {:title => child.email, :children => load_children(child, level+1)} if level+1 <= 5
     end
     children
   end

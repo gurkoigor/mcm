@@ -36,6 +36,7 @@ class Admin::UsersController < ApplicationController
     if @user.update_attributes(params[:user])
       @user.admin = params[:user][:admin]
       @user.save
+      @user.create_tariff
       flash[:notice] = "Пользователь обновлен"
       redirect_to edit_admin_user_path(@user)
     else
@@ -70,6 +71,10 @@ class Admin::UsersController < ApplicationController
 
   def load_user
     @user = User.find_by_id(params[:id])
+  end
+
+  def set_tariff
+
   end
 
 end

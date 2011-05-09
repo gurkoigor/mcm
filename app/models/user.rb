@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+
+  has_many :tariffs_users, :dependent => :destroy
+  has_many :tariffs, :through => :tariffs_users
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -19,10 +21,7 @@ class User < ActiveRecord::Base
   validate :parent_user
   validate :select_tariff_ids
 
-  has_many :tariffs_users, :dependent => :destroy
-  has_many :tariffs, :through => :tariffs_users
-
-  after_save :create_tariff
+  after_create :create_tariff
 
   COEF_CARD = {"1" => 5, "2" => 1, "3" => 1, "4" => 1, "5" => 1}
   COEF_BALANS = {"1" => 5, "2" => 1, "3" => 0.5, "4" => 0.25, "5" => 0.12}
@@ -36,6 +35,13 @@ class User < ActiveRecord::Base
     self.update_attributes(params)
   end
 
+  def create_tariff
+    tariffs_users.clear
+    tariff_ids.uniq.each do |t|
+      tariffs_users.create(:tariff_id => t)
+    end
+  end
+
   private
 
   def parent_user
@@ -44,16 +50,12 @@ class User < ActiveRecord::Base
   end
 
   def select_tariff_ids
-    errors.add(:tariff_ids, "должен быть выбран") if self.tariff_ids.blank?
+    self.tariff_ids = self.tariff_ids.split(',') if self.tariff_ids.is_a?(String)
+    puts "===="
+    puts self.tariff_ids.inspect
+    errors.add(:tariff_ids, "должен быть выбран") if self.tariff_ids.reject{|value| value.blank? }.empty?
     errors.add(:tariff_ids, "не известен") if (Tariff.mobile_kyivstar_tariff.find_all_by_id(self.tariff_ids).count > 1) ||
       (Tariff.mobile_life_tariff.find_all_by_id(self.tariff_ids).count > 1)
-  end
-
-  def create_tariff
-    self.tariffs_users.clear
-    self.tariff_ids.uniq.each do |t|
-      self.tariffs_users.create(:tariff_id => t)
-    end
   end
 
 
