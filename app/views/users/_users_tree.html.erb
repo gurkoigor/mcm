@@ -1,7 +1,14 @@
 <script type="text/javascript">
-  $(function(){
+  $(function() {
     $("#tree").dynatree({
       fx: { height: "toggle", duration: 200 },
+      onActivate: function(node) {
+        $.ajax({
+          url: "/users/"+node.data.id+"/details_information",
+          success: function(data){},
+          dataType: 'script'
+        });
+      },
       initAjax: {
         url: "<%= load_users_user_path(current_user) %>"
       }

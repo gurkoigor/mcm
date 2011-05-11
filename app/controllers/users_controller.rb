@@ -6,8 +6,7 @@ class UsersController < ApplicationController
   end
 
   def load_users
-    children = load_children(@user)
-    render :json => [{:title => @user.email, :children => children} ]
+    render :json => [{:title => @user.full_name, :id => @user.id, :children => load_children(@user)} ]
   end
 
   def load_data_table
@@ -19,6 +18,11 @@ class UsersController < ApplicationController
                      users_count * User::COEF_BALANS["#{level}"] ]
     end
     render :json => h
+  end
+
+  def details_information
+    @user = User.find_by_id(params[:id])
+    render :layout => false
   end
 
   private
@@ -34,7 +38,7 @@ class UsersController < ApplicationController
   def load_children(user, level = 0)
     children = []
     user.children.each do |child|
-      children << {:title => child.email, :children => load_children(child, level+1)} if level+1 <= 5
+      children << {:title => child.full_name, :id => child.id, :children => load_children(child, level+1)} if level+1 <= 5
     end
     children
   end

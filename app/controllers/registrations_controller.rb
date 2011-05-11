@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
     @user = User.new(params[:user])
     if @parent_user.nil?
       @user.errors.add(:parent_id)
-      flash[:alert] = "Реферер не найден"
+      flash[:alert] = "Информационный спонсор не найден"
       render :action => :new
     else
       if @user.save

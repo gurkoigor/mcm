@@ -1,0 +1,35 @@
+<style type="text/css">
+  div.box {height:115px;}
+  div.box {padding:0;}
+  .tabular label{width:210px; margin-right:10px;}
+</style>
+
+<div class="box tabular">
+  <p style="overflow: visible">
+    <label for="email">Почтовый адрес<span class="required"> </span></label>
+    <%= user.email %>
+    <em></em>
+  </p>
+
+  <p style="overflow: visible">
+    <label for="parent_id">Тарифный план<span class="required"> </span></label>
+    <%= user.tariffs.map { |t| "#{t.title}(#{t.value})" }.join(", ") %><br/>
+    <em></em>
+  </p>
+
+  <p style="overflow: visible">
+    <label for="full_name">Контактный номер<span class="required"> </span></label>
+    <%#= user.phone %>
+    <em></em>
+  </p>
+  <p style="overflow: visible">
+    <label for="full_name">Личный информационный номер<span class="required"> </span></label>
+    <%= user.id %>
+    <em></em>
+  </p>
+  <p style="overflow: visible">
+    <label for="full_name">Информационный номер спонсора<span class="required"> </span></label>
+    <%= user.parent_id %>
+    <em></em>
+  </p>
+</div>

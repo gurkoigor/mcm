@@ -9,6 +9,7 @@ Mcm::Application.routes.draw do
     member do
       get :load_users
       get :load_data_table
+      get :details_information
     end
   end
 

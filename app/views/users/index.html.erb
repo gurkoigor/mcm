@@ -1,5 +1,5 @@
 <% content_for :flash_message do %>
-  <%= render :partial => "common/flash_messages", :locals => {:object => nil}%>
+  <%= render :partial => "common/flash_messages", :locals => {:object => nil} %>
 <% end %>
 
 <%= content_for :more_javascripts do %>
@@ -12,25 +12,39 @@
 <% end %>
 
 <%= content_for :title_page do %>
-  <h2>Древовидная Схема Рефералов</h2>
+  <h2>Информационная страница</h2>
 <% end %>
 
-<%= render :partial => "users_tree" %>
+<div id="list-top"></div>
+<div id="list-left" class="splitcontentleft">
+  <div class="mypage-box">
+    <h3>Древовидная Схема Рефералов</h3>
+    <%= render :partial => "users_tree" %>
+  </div>
+</div>
+<div id="list-right" class="splitcontentright">
+  <div class="mypage-box">
+    <h3>Информация о пользователе</h3>
+    <div id="details_user_information">
+      <p class="nodata">Пользователь не выбран</p>
+    </div>
+  </div>
+</div>
 
 <table class='data-table display' style="width: 100%">
   <thead>
-    <tr>
-      <th>Уровень</th>
-      <th>Количество Пользоветелей</th>
-      <th>Карточка</th>
-      <th>Счет</th>
-    </tr>
+  <tr>
+    <th>Уровень</th>
+    <th>Количество Пользоветелей</th>
+    <th>Карточка</th>
+    <th>Счет</th>
+  </tr>
   </thead>
   <tbody>
-    <tr></tr>
+  <tr></tr>
   </tbody>
   <tfoot>
-    <tr></tr>
+  <tr></tr>
   </tfoot>
 </table>
 
@@ -46,6 +60,6 @@
       bInfo: false,
       sAjaxSource: "users/<%= current_user.id %>/load_data_table/"
     });
-  } );
+  });
 </script>
 
