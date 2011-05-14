@@ -16,7 +16,8 @@ Mcm::Application.routes.draw do
   namespace :admin do
     resources :users do
       collection do
-       get :load_users
+        get :load_users
+        get :add_phone
       end
     end
     resources :tariffs do

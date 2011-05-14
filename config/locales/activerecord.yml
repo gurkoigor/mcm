@@ -73,15 +73,18 @@ ru:
         #           blank: "Атрибут {{attribute}} особенный -- у него свое сообщение об ошибке при пустом атрибуте"
     models:
       user: "Пользователь"
+      phones: "Телефон"
     attributes:
       user:
         full_name: "Ф.И.О"
-        parent_id: "Реферер"
+        parent_id: "Информационный спонсор"
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
         current_password: "Текущий пароль"
         email: "Почтовый адрес"
         tariff_ids: "Тарифный план"
+        phones:
+          number: "Номер телефона"
       tariff:
         tariff_type: "Тип"
         title: "Название"

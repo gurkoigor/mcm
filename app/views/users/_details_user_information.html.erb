@@ -18,8 +18,8 @@
   </p>
 
   <p style="overflow: visible">
-    <label for="full_name">Контактный номер<span class="required"> </span></label>
-    <%#= user.phone %>
+    <label for="full_name">Контактные номера<span class="required"> </span></label>
+    <%= user.phones.map(&:number).join(', ') unless user.phones.empty? %>
     <em></em>
   </p>
   <p style="overflow: visible">
@@ -28,8 +28,13 @@
     <em></em>
   </p>
   <p style="overflow: visible">
-    <label for="full_name">Информационный номер спонсора<span class="required"> </span></label>
-    <%= user.parent_id %>
+    <label for="full_name">Ф.И.О спонсора<span class="required"> </span></label>
+    <%= user.parent.full_name unless user.parent.nil? %>
+    <em></em>
+  </p>
+  <p style="overflow: visible">
+    <label for="full_name">Контактные номера спонсора<span class="required"> </span></label>
+    <%= user.parent.phones.map(&:number).join(', ') if !user.parent.nil? && !user.parent.phones.empty? %>
     <em></em>
   </p>
 </div>

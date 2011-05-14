@@ -9,22 +9,26 @@ class Admin::UsersController < ApplicationController
 
   def new
     @user = User.new
+    @phones = @user.phones.build
   end
 
   def create
     @user = User.new(params[:user])
     @user.admin = params[:user][:admin]
+    @user.date_of_trip = params[:user][:date_of_trip]
     if @user.save
       flash[:notice] = "Пользователь создан"
       redirect_to edit_admin_user_path(@user)
     else
+      @phones = @user.phones.build if @user.phones.empty?
       flash[:error] = "Пользователь не создан"
       render :action => :new
     end
   end
 
   def edit
-
+    @phones = @user.phones
+    @phones = @user.phones.build if @phones.empty?
   end
 
   def update
@@ -35,6 +39,7 @@ class Admin::UsersController < ApplicationController
 
     if @user.update_attributes(params[:user])
       @user.admin = params[:user][:admin]
+      @user.date_of_trip = params[:user][:date_of_trip]
       @user.save
       @user.create_tariff
       flash[:notice] = "Пользователь обновлен"
@@ -66,6 +71,8 @@ class Admin::UsersController < ApplicationController
     @users = @users.map{|u| {:label => u.email, :value => u.id}} unless @users.nil?
     render :json => @users
   end
+
+  def add_phone; end
 
   private
 

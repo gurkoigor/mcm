@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :tariffs_users, :dependent => :destroy
   has_many :tariffs, :through => :tariffs_users
+  has_many :phones, :dependent => :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -9,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessor :tariff_ids
   attr_accessible :email, :password, :password_confirmation, :remember_me, :parent_id,
                   :full_name, :tariff_ids
-  attr_protected :active, :admin
+  attr_protected :admin, :date_of_trip
 
   validates :parent_id, :presence => true
   validates :full_name, :presence => true
@@ -22,6 +23,8 @@ class User < ActiveRecord::Base
   validate :select_tariff_ids
 
   after_create :create_tariff
+
+  accepts_nested_attributes_for :phones, :allow_destroy => true, :reject_if => proc { |attributes| attributes['number'].blank? }
 
   COEF_CARD = {"1" => 5, "2" => 1, "3" => 1, "4" => 1, "5" => 1}
   COEF_BALANS = {"1" => 5, "2" => 1, "3" => 0.5, "4" => 0.25, "5" => 0.12}
@@ -40,6 +43,10 @@ class User < ActiveRecord::Base
     tariff_ids.uniq.each do |t|
       tariffs_users.create(:tariff_id => t)
     end
+  end
+
+  def active?
+    true
   end
 
   private

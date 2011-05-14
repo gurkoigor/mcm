@@ -61,8 +61,32 @@
 </div>
 
 <p>
-  <label for="active">Активность<span class="required"> &nbsp;</span></label>
-  <%= f.check_box :active %>
+  <label for="admin">
+    Контактные номера
+  <span class="required"> &nbsp;</span><br />
+  <%= link_to "Добавить номер", add_phone_admin_users_path, :remote => true %>&nbsp;&nbsp;&nbsp;
+  </label>
+  <span id="phones">
+  <%= f.fields_for :phones do |f_p| %>
+      <% id = generate_rendom_id %>
+      <%= f_p.hidden_field :_destroy, :id => id %>
+      <%= raw f_p.text_field :number, :id => "field_#{id}" %>
+      <span id="delete_span_<%= id %>">
+        <%= link_to_function "Удалить номер", "$('##{id}').val(true); $('#field_#{id}').css('background', 'red');
+        $('#delete_span_#{id}').toggle(); $('#return_span_#{id}').toggle(); return false;" %>
+      </span>
+      <span id="return_span_<%= id %>" style="display:none;">
+        <%= link_to_function "Отменить", "$('##{id}').val(false); $('#field_#{id}').css('background', 'white');
+        $('#delete_span_#{id}').toggle(); $('#return_span_#{id}').toggle(); return false;" %>
+      </span>
+      <br />
+  <% end %>
+  </span>
+</p>
+
+<p>
+  <label for="active">Дата отключения<span class="required"> &nbsp;</span></label>
+  <%= f.text_field :date_of_trip %>
   <em></em>
 </p>
 
@@ -86,5 +110,6 @@
       });
     }
   });
+
 </script>
 

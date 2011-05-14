@@ -18,5 +18,9 @@ module ApplicationHelper
     result
   end
 
+  def generate_rendom_id
+    Digest::SHA1.hexdigest(Time.now.to_f.to_s)
+  end
+
 end
 

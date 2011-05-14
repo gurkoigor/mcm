@@ -1,0 +1,5 @@
+<% id = generate_rendom_id %>
+<span id="span_<%= id %>">
+  <%= raw text_field_tag "user[phones_attributes][#{id}][number]", "", :size => 30, :id => id  %>
+  <%= link_to_function "Удалить номер", "$('#span_#{id}').remove(); return false;" %><br />
+</span>
