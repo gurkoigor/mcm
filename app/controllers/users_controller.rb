@@ -16,8 +16,8 @@ class UsersController < ApplicationController
       active_users = 0
       users.each{|u| active_users = active_users+1 if u.active?}
       users_count = users.size
-      h[:aaData] << [level, users_count, active_users, users_count - active_users, active_users * User::COEF_CARD["#{level}"],
-                     users_count * User::COEF_BALANS["#{level}"] ]
+      h[:aaData] << [level, users_count, active_users, users_count - active_users, 
+        active_users * User::COEF_CARD["#{level}"], active_users * User::COEF_BALANS["#{level}"] ]
     end
     render :json => h
   end

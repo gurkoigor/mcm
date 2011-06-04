@@ -37,4 +37,9 @@
     <%= user.parent.phones.map(&:number).join(', ') if !user.parent.nil? && !user.parent.phones.empty? %>
     <em></em>
   </p>
+  <p style="overflow: visible">
+    <label for="full_name">Актиность<span class="required"> </span></label>
+      <%= raw user.active? ? user.date_of_trip.to_date : "<span style='color:red;'>Пользователь неактивен</span" %>
+    <em></em>
+  </p>
 </div>

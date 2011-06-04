@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   end
 
   def active?
-    true
+    self.date_of_trip > Time.now
   end
 
   private

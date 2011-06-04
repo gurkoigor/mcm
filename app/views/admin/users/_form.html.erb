@@ -86,7 +86,8 @@
 
 <p>
   <label for="active">Дата отключения<span class="required"> &nbsp;</span></label>
-  <%= f.text_field :date_of_trip %>
+  <%= f.text_field :date_of_trip, :value => f.object.date_of_trip.to_date,
+    :readonly => true %>
   <em></em>
 </p>
 
@@ -110,6 +111,13 @@
       });
     }
   });
-
+  $(document).ready(function() {
+    $('#user_date_of_trip').datepicker({
+	  showOn: "button",
+	  buttonImage: "/images/calendar.png",
+	  buttonImageOnly: true,
+      dateFormat: "yy-mm-dd"
+	});
+  });
 </script>
 
